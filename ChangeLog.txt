@@ -1,0 +1,969 @@
+//============================================================
+//= rAthenaCN 更新日志
+//============================================================
+
+v1.7.3(2017-09-03)
+------------------
+[同步] rAthena官方Github库
+       https://github.com/rathena/rathena/commit/470364cbe15519e2268a7f6f91668320cb622371
+[升级] 若您不是全新安装的话, 请在您的【主数据库】上按顺序导入以下sql文件
+       - sql-files\upgrades\v1.7.3\upgrade_20170806.sql
+       - sql-files\upgrades\v1.7.3\upgrade_20170830.sql
+[新增] 实现 OnPCBFOpenRouletteEvent 事件, 当准备打开乐透大转盘时触发, 详见 npc/racn/racn_events.txt
+[新增] 实现 OnPCAFCloseRouletteEvent 事件, 当乐透大转盘被关闭时触发, 详见 npc/racn/racn_events.txt
+[新增] 实现 aspd_formula_bAspd_fixed 选项, 可控制 bAspd 加成是否会被其他因素影响, 详见: conf/battle/extend.conf
+[新增] 实现 sendmail 系列脚本指令, 详见演示脚本: npc/racn/racn_sendmail.txt
+[新增] 实现 getareagid 脚本指令, 可获得特定范围内各类型单位的全部GID (感谢“╰づ记忆•斑驳〤”实现该指令)
+[新增] 默认禁止在使用 _M/_F 方式进行注册时使用中文账号, 详见 conf/login_athena.conf (感谢“づAtメ、”建议)
+[定制] 从此版本开始, 客户端封包定制支持到 20170614 版本
+[修正] 修正人工生命体无法自动回复HP和SP的问题 (感谢“西瓜”反馈)
+[修正] 修正 import 目录的升级方式, 使之能够将 import-tmpl 中新增的文件自动复制到 import 目录中
+[修正] 对 processhalt 的机制进行了改良, 解决某些情况下中断会出现异常的问题 (感谢“づAtメ、”反馈)
+[修正] rAthena官方BUG: 修正老邮件系统在提取附件时, 可能会出现多次的“附件提取成功”提示的问题
+[修正] rAthena官方BUG: 修正在不支持成就系统的客户端版本中, 使用成就系统相关的脚本指令会导致地图服务器崩溃的问题
+[修正] rAthena官方BUG: 使版本大于等于 20131223 的客户端在NPC一上来就直接调用 callshop 时, 玩家能够被禁止移动
+[修正] rAthena官方BUG: 当成就系统的yml文件不存在时, 地图服务器能够显示错误信息而不是直接崩溃
+[调整] 完成对事件名称的重新梳理和改造, 并完善事件说明文档 doc/rAthenaCN_events.txt
+[调整] 调整 conf/battle/extend.conf 配置文件中的一些说明错误
+[调整] 调整 doc/rAthenaCN_atcommands.txt 中关于 @refreshnpc 已废弃指令的说明
+[调整] 由于 rAthena 官方已经解决了使用 @autoloot 时 item_flag.txt 为 16 的道具无公告的问题, 去掉之前的修正代码
+[调整] 移除老版本的成就系统数据库文件(achievement_db.conf)
+[汉化] 完全汉化 doc/item_bonus.txt 文档 (感谢“西瓜”提供翻译初稿)
+[汉化] 更新终端汉化配置文件 conf/msg_conf/translation.conf
+
+v1.7.2(2017-08-02)
+------------------
+[同步] rAthena官方Github库
+       https://github.com/rathena/rathena/commit/c0556a397e864f8a73dce6f2ff32bb367443e18b
+[升级] 若您不是全新安装的话, 请进行以下文件操作
+       - 将压缩包中的 db\import-tmpl\achievement_db.yml 复制到你服务端的 db\import 目录下
+[注意] 从此版本开始, rAthena 官方弃用了原先的 db/packet_db.txt 配置文件
+[注意] 从此版本开始, rAthena 官方将成就系统的数据库文件从 conf 格式调整为 yaml 格式
+[新增] 支持设定封包混淆密钥, 详情请见 conf/map_athena.conf 中的 packet_keys 选项
+[新增] 加入战斗配置文件完整性校验机制, 当战斗配置文件中缺少选项时, 能显示警告信息 (感谢“╰づ记忆•斑驳〤”实现)
+[新增] 能够对“元素使”使用 @bodystyle 指令来切换服装风格 (客户端必须有对应的图档，否则会报错)
+[新增] 实现 OnBeforeIdentifiedItem 事件, 当选择一个装备进行鉴定时触发 (支持 processhalt 中断)
+[新增] 新增 countinventory 脚本指令, 用来根据指定背包序号获取该道具在背包中的数量
+[新增] 新增 identifybyidx 脚本指令, 能够根据指定的背包序号, 对该道具进行鉴定操作
+[修正] 修正多线网络支持机制从 v1.6.8 开始就无法正常使用的问题
+[汉化] 更新终端汉化配置文件 conf/msg_conf/translation.conf
+
+v1.7.1(2017-07-15)
+------------------
+[同步] rAthena官方Github库
+       https://github.com/rathena/rathena/commit/0d103bf6a788a09a13512e5ca20fa94fc907360c
+[升级] 若您不是全新安装的话, 请在您的【主数据库】上按顺序导入以下sql文件
+       - sql-files\upgrades\v1.7.1\upgrade_20170702.sql
+[新增] 新增 copynpc/dupnpc 脚本指令, 用来动态的复制NPC (感谢“冰点”建议)
+[修正] rAthena官方BUG: 避免有副本处于活跃状态时, 使用 CTRL+C 关闭地图服务器会导致崩溃的问题
+[修正] rAthena官方BUG: 修正将已经放到RODEX邮件中的道具移除时，重量计算不正确的问题 (感谢“Jian916”反馈)
+[修正] rAthena官方BUG: 修正 RODEX 通知图标显示逻辑不正确的问题 (感谢“西瓜”反馈)
+[修正] rAthena官方BUG: 修正某些情况下 disable_items/enable_items 脚本指令可能会失效的问题 (感谢“dicer”反馈)
+[修正] rAthena官方BUG: 修正自从开始支持 RODEX 之后, 老邮件系统的附件处理不正常的问题
+[修正] rAthena官方BUG: 修正在某些情况下 RODEX 无法撰写新邮件的问题 (感谢“づAtメ、”反馈)
+[修正] rAthena官方BUG: 修正当 mail_show_status 选项为 2 的情况下, 玩家登陆时如果仅有 1 封新邮件, 则不会显示信件状态的问题
+[修正] rAthena官方BUG: 修正老邮件系统在某些情况下, 客户端还能看到被寄出去的道具还能被返还到背包的问题 (实际上没被返还)
+[修正] rAthena官方BUG: 修正 channel_chat 脚本指令的 color 没有进行 RGB2BGR 转换的问题 (感谢“Jian916”反馈)
+[修正] 修正 chars_per_account 选项在不启用VIP会员系统的情况下没有限制作用的问题 (感谢“Jian916”反馈)
+[修正] 修正当 renewal_disable_items_logic 选项为 1 的时候, 无法使用消耗品道具的问题 (感谢“づAtメ、”反馈)
+[修正] 修正在 OnPCStatCalcEvent 中使用 end 指令在某些情况下会导致当前的 NPC 对话被异常终止的问题 (感谢“locuse”反馈)
+[调整] 不强制要求 sleep2 指令必须关联到玩家才能用 (感谢“懒猪”反馈)
+[汉化] 更新终端汉化配置文件 conf/msg_conf/translation.conf
+
+v1.7.0(2017-06-23)
+------------------
+[同步] rAthena官方Github库
+       https://github.com/rathena/rathena/commit/6a75b173801bbc19982522126d9e217a4eb5cd80
+[警告] 此版本整合了 rAthena 测试中的成就系统, 尚未经过充分测试.
+[警告] 此版本支持了新的邮件系统(RODEX), 也是 rAthena 官方刚上线的功能.
+[警告] 此版本不推荐应用于线上服务器, 若发现任何问题请随时上报, 以便修正改进.
+[升级] 若您不是全新安装的话, 请在您的【主数据库】上按顺序导入以下sql文件
+       - sql-files\upgrades\v1.7.0\upgrade_20170727.sql
+       - sql-files\upgrades\v1.7.0\upgrade_20170620.sql
+[升级] 若您不是全新安装的话, 请进行以下文件操作
+       - 将压缩包中的 db\import-tmpl\achievement_db.conf 复制到你服务端的 db\import 目录下
+[新增] 新增 getidxrandomoption 和 setidxrandomoption 脚本指令, 用来根据背包序号读写装备的 Random Option 属性 (感谢“づAtメ、”建议)
+[新增] 使 OnPCViewEquipEvent 支持被 processhalt 指令中断 (感谢“Jian916”建议)
+[新增] 扩展 getiteminfo 指令的返回内容, 详见 doc/rAthenaCN_script_commands.txt (感谢“Sz”建议)
+[修正] rAthena官方BUG: 修正 rAthena 官方的 RandomOptions 系列指令不能接受 ID 数组为空的情况 (感谢“づAtメ、”反馈)
+[修正] rAthena官方BUG: 避免使用 recalculatestat 会导致 OnPCStatCalcEvent 中的 bonus 系列指令工作不正常 (感谢“Jian916”反馈, “╰づ记忆•斑驳〤”提供核心代码)
+[修正] rAthena官方BUG: 修正当 marketshop 类型商店的道具数量无效时, 地图服务器会在载入脚本时崩溃的问题 (感谢“Jian916”反馈)
+[修正] 修正在 OnPCBeforeEquipEvent / OnPCBeforeUnequipEvent 事件中, 使用 delinventory 删掉对应道具会导致服务器崩溃的问题 (感谢“locuse”反馈)
+
+v1.6.9(2017-05-21)
+------------------
+[同步] rAthena官方Github库
+       https://github.com/rathena/rathena/commit/6a75b173801bbc19982522126d9e217a4eb5cd80
+[修正] rAthena官方BUG: 修正 RandomOptions 系列指令严格要求 Value 和 Parameter 不能为 0 的问题 (感谢“づAtメ、”反馈)
+[修正] rAthena官方BUG: 修正 zlib.dll 及 pcre8.dll 依赖 VCRUNTIME140.dll 和 MSVCR110.dll 的问题 (感谢“づAtメ、”和“Mr.Siu””反馈)
+[修正] 修正直接导入 main.sql 时, clan 表与 clan_alliance 表的内容为乱码的问题
+[调整] 脚本指令 logout 支持以账号编号、角色编号、角色名称等多种方式来指定角色(感谢“Jian916”反馈)
+[调整] 自带微软官方提供的 msvcr120.dll (x86版) 运行时库文件
+[汉化] 更新终端汉化配置文件 conf/msg_conf/translation.conf
+
+v1.6.8(2017-05-13)
+------------------
+[同步] rAthena官方Github库
+       https://github.com/rathena/rathena/commit/79ad0a1902009b7509e0b2a97ecb2571fd0af6f1
+[升级] 若您不是全新安装的话, 请在您的【主数据库】上按顺序导入以下sql文件
+       - sql-files\upgrades\v1.6.8\upgrade_20170417.sql
+       - sql-files\upgrades\v1.6.8\upgrade_20170509.sql
+[升级] 若您不是全新安装的话, 请在您的【日志数据库】上按顺序导入以下sql文件
+       - sql-files\upgrades\v1.6.8\upgrade_20170417_logs.sql
+[修正] rAthena官方BUG: 修正使用 channel_kick 脚本指令时的回显信息错误 (感谢“Jian916”反馈)
+[修正] rAthena官方BUG: 修正 channel_create 指令的 color 代码没有进行 RGB2BGR 转换的问题 (感谢“Jian916”反馈)
+[调整] 声明弃用 getoptionitem 脚本指令, 请使用 rAthena 官方新增的 getitem3 指令替代
+[调整] 声明弃用 readoptarray、writeoptarray 脚本指令
+[调整] 声明弃用 getoptionarraybyidx、getoptionarraybypos 脚本指令
+[汉化] 完善 ignore_extremityfist_sp_limit 的选项说明, 详见 conf/battle/extend.conf
+[汉化] 更新终端汉化配置文件 conf/msg_conf/translation.conf
+
+v1.6.7(2017-04-28)
+------------------
+[同步] rAthena官方Github库
+       https://github.com/rathena/rathena/commit/bf2461f2b071f51bb3cb4cf832960be22424f91b
+[新增] 此版本开始支持 2016-02-03aRagexeRE 客户端 (试验功能, 无法保证稳定性)
+[新增] 扩展更详细的 npc_event_dequeue: event timer is full ! 报错信息
+[修正] rAthena官方BUG: 修正在使用“开设采购商店”技能后, 角色可以随意移动的问题 (感谢“湅”提供情报)
+[修正] 修正 script4each 在给地图名称字段传递一个字符串变量时, 没有效果的问题 (感谢“locuse”反馈)
+[修正] 修正特定情况下可能会导致地图服务器崩溃的问题 (感谢“小雨”反馈)
+[修正] 修正上次新增事件后, @eventrpt 返回的事件名称不正确的问题 (感谢“づAtメ、”反馈)
+[调整] 当程序崩溃时能够生成更加完整的调试信息 (有选项可控制)
+[汉化] 简单汉化新频道系统的配置文件, 详见 conf/channels.conf
+[汉化] 更新终端汉化配置文件 conf/msg_conf/translation.conf
+
+v1.6.6(2017-04-16)
+------------------
+[同步] rAthena官方Github库
+       https://github.com/rathena/rathena/commit/a75133eb4d8976c1c890d5420665e7a76349e226
+[升级] 若您不是全新安装, 且使用了SQL版本的物品和魔物数据库的话, 请在您的【主数据库】上按顺序导入以下sql文件
+       - sql-files\upgrades\v1.6.6\upgrade_20170327.sql
+[新增] 新增名为 hideguildinfo 的地图标记, 在拥有此标记的地图上, 玩家将看不到其他人的公会名称和图标等信息
+[新增] 新增名为 hidepartyinfo 的地图标记, 在拥有此标记的地图上, 玩家将看不到自己和其他人的队伍名称
+[新增] 全方位过滤RE版客户端的物品链接炸弹(正常的物品链接不受影响), 感谢“Jian916”反馈
+[新增] 新增对日服最近给“魅影追踪者/宫廷乐师/浪姬舞者”添加的新服装风格 (客户端资源文件请见 LeeClient 项目的提交记录)
+[修正] rAthena官方BUG: 避免复兴后版本连续使用官方的“移动仓库使用券”等会打开对话框的道具时, 会导致地图服务器报错的问题
+[修正] 修正给 getinventoryinfo 脚本指令传递错误的背包序号，会导致地图服务器崩溃的问题(感谢“◆夏沫依丶”反馈)
+[修正] 修正 sc_check 脚本指令在获取永久SC状态的信息时, 会导致地图服务器崩溃的问题(感谢“冰点”反馈)
+[修正] 修正执行玩家死亡事件时可能会导致地图服务器崩溃的问题(感谢“小雨”反馈)
+[修正] 修正 conf 目录中多处配置文件的注释内容错误 (感谢“懒猪”指出)
+[定制] 从此版本开始, 支持定制“佣兵的种类上限”(因为官方最大佣兵种类上限为 61, 无法增加任何一个自定义佣兵)
+[定制] 从此版本开始, rAthena 官方默认支持的“合法的NPC外观编号上限”从 10236 提升到 10249
+[汉化] 完整翻译并解释“精炼数据库”中各个字段的说明, 详见 db/[pre-]re/refine_db.txt
+[汉化] 翻译【主数据库】建库脚本 sql-files/main.sql 中预置的几个部落名称(部落会长的名称翻译借鉴自 99MaxEa)
+[汉化] 更新终端汉化配置文件 conf/msg_conf/translation.conf
+
+v1.6.5(2017-03-04)
+------------------
+[同步] rAthena官方Github库
+       https://github.com/rathena/rathena/commit/800f22b77bb63c2305d05956de8fbe5db0327ded
+[升级] 若您不是全新安装的话, 请在您的【主数据库】上按顺序导入以下sql文件
+       - sql-files\upgrades\upgrade_20170215.sql
+       - sql-files\upgrades\upgrade_20170218.sql
+[升级] 若您不是全新安装的话, 请在您的【日志数据库】上按顺序导入以下sql文件
+       - sql-files\upgrades\upgrade_20170218_log.sql
+[新增] 新增 OnPCBeforeEquipEvent 和 OnPCBeforeUnequipEvent 事件
+[新增] 初步添加 rAthenaCN 自定义的事件说明文档 (事件是全的, 但内容有待完善)
+[修正] 修正 OnPCEquipEvent 与 OnPCUnEquipEvent 触发顺序错误的问题 (感谢“好刀一把”反馈)
+[修正] 修正 conf/char_athena.conf 中 char_del_option 选项的注释错误 (感谢“懒猪”反馈)
+[汉化] 更新终端汉化配置文件 conf/msg_conf/translation.conf
+
+v1.6.4(2017-02-04)
+------------------
+[同步] rAthena官方Github库
+       https://github.com/rathena/rathena/commit/7377f0f674525aa6ffcf96218791408cb031bb20
+[升级] 若您不是全新安装的话, 请在您的【日志数据库】上按顺序导入以下sql文件
+       - sql-files\upgrades\upgrade_20170113_log.sql
+[新增] 完善 processhalt 指令的说明和支持的事件范围(该指令慎用)
+[新增] 现在开始小写的 #cashpoints 和 #kafrapoints 变量强制等价于大写的 #CASHPOINTS 和 #KAFRAPOINTS 变量
+[调整] 废弃 @refreshnpc 指令并使用 rAthena 官方实现的 @reloadnpcfile 指令取而代之
+[修正] 修正开启 VIP 会员功能之后, 角色选择界面中角色可用洞数显示错误的问题(感谢“月朗风清”反馈)
+[修正] 修正敏感词过滤机制对 channel 频道系统无效的问题(感谢“づAtメ、”反馈)
+[修正] rAthena官方BUG: 修正在 OnPCEquipEvent 事件中使用无效的 bonus 指令会导致地图服务器崩溃的问题(感谢“赑咭嗒”反馈)
+[修正] 修正过滤“物品链接炸弹”会误判部分正常物品的问题(感谢“Jian916”反馈)
+[文档] 修改GM指令和脚本指令文档的编码为 UTF8
+[文档] 新增 rAthenaCN 地图标记说明文件, 详见 doc/rAthenaCN_mapflags.txt
+[汉化] 汉化 hide_fav_sell 战斗配置选项的说明, 详见 conf/battle/misc.conf
+[汉化] 更新终端汉化配置文件 conf/msg_conf/translation.conf
+
+v1.6.3(2017-01-21)
+------------------
+[新增] 使“聊天内容敏感词过滤”功能支持正则表达式, 详见 db/manner.txt
+[新增] 使用 @version 指令可以显示更加丰富的信息(客户端版本、定制编号等)
+[定制] 从此版本开始, 支持定制“队伍的最大成员数量上限”
+[定制] 从此版本开始, 支持定制“宠物拾取道具的最大数量上限”
+[定制] 从此版本开始, 支持定制“合法的NPC外观编号上限”
+[修正] 修正 OnSellItem 事件返回的 @sold_idx[] 数组只对装备类型有效的问题(感谢“好刀一把”反馈)
+[修正] rAthena官方BUG: 修正当 slaves_inherit_mode 选项的值为 3 时, 使用 @summon 召唤魔物会导致地图服务器崩溃的问题(感谢“ぎ冇葥圖じ”反馈)
+[调整] 更新完善NPC调用统计指令 @eventrpt, 使之能够统计被事件队列暂存的事件
+[调整] 使 @refreshnpc 能够刷新从未被加载过的 npc 脚本, 而不是直接提示“找不到脚本文件”
+[调整] 使用 mapannounce 脚本指令发送的内容不再进行敏感词过滤(降低系统性能开销)
+[文档] 完善了 processhalt 脚本指令的说明文档
+[文档] 新增 rAthenaCN 自定义GM指令说明文件, 详见 doc/rAthenaCN_atcommands.txt
+[汉化] 微调细化一下字符串汉化配置文件 conf/msg_conf/racn_map_msg.conf
+[汉化] 汉化最近 rAthena 官方新增的两个战斗配置选项, 详见 conf/battle/guild.conf 和 party.conf
+[汉化] 更新终端汉化配置文件 conf/msg_conf/translation.conf
+
+v1.6.2(2017-01-14)
+------------------
+[同步] rAthena官方Github库
+       https://github.com/rathena/rathena/commit/f5c43329b2c241acd35ec9b2b8bc96d900290b12
+[新增] 在 OnSellItem 事件返回的数组中, 增加被出售物品的背包序号数组, 数组名为 @sold_idx[] (感谢“好刀一把”建议)
+[新增] 能够为默认的 main、support 等频道设置中文名称, 详见 conf/channels.conf (感谢“VegetableMelody”建议)
+[汉化] 更新终端汉化配置文件 conf/msg_conf/translation.conf
+
+v1.6.1(2017-01-05)
+------------------
+[同步] rAthena官方Github库
+       https://github.com/rathena/rathena/commit/03a54402bc14c620d4f478c5c8b887728213aad4
+[修正] rAthena官方BUG: 修正在 20130807 客户端中将队长交给不同地图玩家时, 提示文案错误的问题
+[调整] 配合官网的更新, 上线新的定制引擎
+[汉化] 更新终端汉化配置文件 conf/msg_conf/translation.conf
+
+v1.6.0(2016-12-21)
+------------------
+[新增] 全方位过滤 <ITEM> 物品链接炸弹(正常的物品链接不受影响), 完全免费(感谢“龙王蛮蛮”反馈)
+[新增] 新增“close_skill_common_delay”选项, 用来关闭技能的公用延迟特性, 详见 conf/battle/extend.conf
+[新增] 在使用 announce、mapannounce、areaannounce 脚本指令时, 若内容包含 db/manner.txt 中所定义的敏感词, 则不发送公告
+[修正] 修正被隐藏外观的装备, 在首次穿戴后立刻打开“装备面板”还能看见有外观的问题 (感谢“the world”反馈)
+
+v1.5.9(2016-12-02)
+------------------
+[同步] rAthena官方Github库
+       https://github.com/rathena/rathena/commit/33fa182c48752ff76a35f847142c994b8476c5e0
+[新增] 实现“reject_create_doram_character”选项, 允许禁止创建杜兰族角色, 详见 conf/char_athena.conf (感谢“好刀一把”建议)
+[新增] 实现“装备外观隐藏数据库”, 详见 db/item_noview.txt
+[修正] 修正偶尔会出现 Zero-Length 报错, 以及地图服务器不定时崩溃的问题
+[修正] rAthena官方BUG: 避免复兴前服务端使用杜兰族技能可能会导致崩溃的问题(感谢“好刀一把”反馈)
+[调整] 完善 script4each 指令的的使用说明, 详见 doc/rAthenaCN_script_commands.txt
+[调整] 由于新增了““装备外观隐藏数据库””, 所以取消 “viewequip_hide_costume_aspect” 选项, 详见 conf/battle/extend.conf
+[汉化] 汉化 db 目录中所有涉及到“区域限制”的注释说明
+[汉化] 汉化“玩家战斗配置文件”中的 2 个选项, 详见 conf/battle/player.conf
+[汉化] 更新终端汉化配置文件 conf/msg_conf/translation.conf
+
+v1.5.8(2016-11-24)
+------------------
+[同步] rAthena官方Github库
+       https://github.com/rathena/rathena/commit/9040613fa6577a9c302a77a544a58b0a51db62bc
+[新增] 实现“共享任务杀怪进度的范围”选项, 详见 conf/battle/extend.conf (感谢“VegetableMelody”建议)
+[新增] 实现“combo_db_overwrite_mode”选项, 用来控制 item_combo_db 的生效策略, 详见 conf/battle/extend.conf (感谢“咪兔酱”反馈)
+[新增] 实现 OnProgressbarAbortEvent 事件, 当进度条被打断时触发, 详见 npc/racn/racn_progressbar_abort.txt (感谢“好刀一把”建议)
+[新增] 在 item_noequip.txt 中被禁用的护身符道具将不会触发它的“使用效果”, 但穿戴和脱下脚本不受影响 (感谢“好刀一把”建议)
+[新增] 让 getinventorylist 和 getinventoryinfo 能返回装备的唯一编号 (感谢“懒猪”反馈)
+[新增] 支持在终端翻译数据库中修改定制信息的文案, 便于进行繁体化操作 (感谢“VegetableMelody”反馈)
+[修正] rAthena官方BUG: 修正 @accinfo 中显示杜兰族召唤师的职业名称错误的问题(感谢“VegetableMelody”指出)
+[修正] rAthena官方BUG: 修正特殊情况下, 基因学者的三转技能习得后重新登录游戏技能丢失的问题(感谢“Ray”反馈)
+[修正] rAthena官方BUG: 修正当特殊情况下, 角色无法进入地图服务器的问题(感谢“づAtメ、”反馈)
+[修正] rAthena官方BUG: 修正一处可能导致地图服务器崩溃的问题
+[汉化] 汉化“玩家战斗配置文件”中的 6 个选项说明, 详见 conf/battle/player.conf
+[汉化] 完善“use_MD5_passwords”选项的注释说明(感谢“好刀一把”反馈)
+[汉化] 更新终端汉化配置文件 conf/msg_conf/translation.conf
+
+v1.5.7(2016-11-18)
+------------------
+[同步] rAthena官方Github库
+       https://github.com/rathena/rathena/commit/1aa2012cff16d1bbe4f5172db52de483366b16ca
+[升级] 若您不是全新安装的话, 请在您的【主数据库】上按顺序导入以下sql文件
+       - sql-files\upgrades\upgrade_20161116.sql
+[修正] getoptionitem、readoptarray、writeoptarray的返回结果错误问题(感谢“好刀一把”反馈)
+[汉化] 完全汉化“仓库配置文件”, 详见 conf/inter_server.conf
+[汉化] 汉化“战斗配置文件”中关于“物理防御力惩罚”的 4 个选项, 详见 conf/battle/battle.conf
+[汉化] 汉化“客户端战斗配置文件”中的 3 个选项, 详见 conf/battle/client.conf
+[汉化] 汉化“魔物战斗配置文件”中的 1 个选项, 详见 conf/battle/monster.conf
+[汉化] 更新终端汉化配置文件 conf/msg_conf/translation.conf
+
+v1.5.6(2016-11-11)
+------------------
+[同步] rAthena官方Github库
+       https://github.com/rathena/rathena/commit/4c2adc0d0b3a65a599c0cb7e5ea089af801970f7
+[修正] 防止在处理事件队列的时候发生崩溃的问题 (感谢“the world”反馈)
+[修正] 修正一个可能会导致地图服务器崩溃的问题 (感谢“the world”反馈)
+[汉化] 完全汉化“宠物战斗配置文件”, 详见 conf/battle/pet.conf
+[汉化] 完全汉化“其他战斗配置信息”, 详见 conf/battle/misc.conf
+[汉化] 汉化“玩家战斗配置文件”中的 6 个选项, 详见 conf/battle/player.conf
+[汉化] 汉化“魔物战斗配置文件”中的 5 个选项, 详见 conf/battle/monster.conf
+[汉化] 汉化“客户端战斗配置文件”中的 7 个选项, 详见 conf/battle/client.conf
+[汉化] 更新终端汉化配置文件 conf/msg_conf/translation.conf
+
+v1.5.5(2016-11-05)
+------------------
+[同步] rAthena官方Github库
+       https://github.com/rathena/rathena/commit/805f11d9f0e5a1285ed26b5f6a28231e5d325625
+[新增] 添加“是否隐藏角色服务器的在线人数”的设置, 详见 conf/char_athena.conf
+[新增] 新增“extra_ammo_requirement”选项, 详见 conf/battle/extend.conf
+[修正] rAthena官方BUG: 修正公会技能的一部分代码可能导致崩溃的问题 (感谢“the world”反馈)
+[修正] rAthena官方BUG: 修正在特定操作情况下, 被 disablenpc 禁用的 NPC 重登后可见的问题 (感谢“聽風”反馈)
+[汉化] 完全汉化“物品战斗配置文件”, 详见 conf/battle/items.conf
+[汉化] 汉化其他 4 个战斗配置文件的部分内容, 以及指令回显文案
+[汉化] 更新终端汉化配置文件 conf/msg_conf/translation.conf
+
+v1.5.4(2016-10-29)
+------------------
+[同步] rAthena官方Github库
+       https://github.com/rathena/rathena/commit/481a730ebc2b03ac5a9296f244471ea624db9fe2
+[调整] 换一种方式实现事件队列, 以便在扩大队列容量的时候不会导致服务端出错 (感谢“晓晓”提点)
+[调整] 完善多线网络支持机制的启动提示, 以便在终端看出多线网络支持机制的工作状态
+[修正] rAthena官方BUG: 当队伍的物品拾取与分配策略都设置为“各取自得”的时候, 将不再显示其他队员拾取到的物品.
+[汉化] 完全汉化 conf 目录下 8 个配置文件的说明信息 (此外, 还补充汉化、调优了 3 个配置文件的注释文案)
+[汉化] 更新终端汉化配置文件 conf/msg_conf/translation.conf
+
+v1.5.3(2016-10-21)
+------------------
+[修正] 客户端删除角色时可能会卡住, 以及删除时间可能错乱的问题 (感谢“. L .”协助测试)
+[修正] resetoptionbyidx 在处理尚未装备的道具时会报错的问题
+[修正] getoptionitem、readoptarray、writeoptarray 可能导致内存泄露的问题
+[修正] 一处终端提示信息中的翻译错误 (TE城战错误的翻译成了TD城战, 现已修正)
+[汉化] conf/char_athena.conf 中 char_del_restriction 选项的说明信息
+
+v1.5.2(2016-10-19)
+------------------
+[同步] rAthena官方Github库
+       https://github.com/rathena/rathena/commit/09cb81d98ed652f7f88e96ef90976776d10a9d65
+[升级] 若您不是全新安装的话, 请在您的【主数据库】上按顺序导入以下sql文件
+       - sql-files\upgrades\upgrade_20161013.sql
+[新增] 允许通过切换武器的方式修改伤害结算时的附加特性, 详见 conf/battle/extend.conf
+[新增] rAthenaCN 拓展脚本指令的说明文件, 详见 doc/rAthenaCN_script_commands.txt
+[新增] 实现 getequipidx 脚本指令, 用来获取穿戴在指定位置的装备的“背包位置序号”
+[新增] 实现 7 个用于操作 Random Option 机制的脚本指令, 详见 doc/rAthenaCN_script_commands.txt
+[修正] query_multidb 脚本指令的一处错误 (感谢“Sariel”反馈)
+[修正] rAthena官方BUG: 脚本引擎一处容易导致地图服务器崩溃的问题 (感谢“Ray”反馈)
+[修正] 当账号中刚刚好有三个角色时, 角色选择界面无法正确显示地图名称的问题 (感谢“咪兔酱”反馈)
+[修正] 开启VIP会员系统后, 若配置了 vip_char_increase 会让客户端展现怪异的问题
+[修正] 在 instance_create 中调用缺失 instance_db.txt 数据的副本时, 不应该直接崩溃 (感谢“づAtメ、”反馈)
+[调整] 默认不再加载“事件演示脚本”, 有需要的可以到 npc/scripts_racn.conf 手动开启
+[汉化] 更新终端汉化配置文件 conf/msg_conf/translation.conf
+
+v1.5.1(2016-09-04)
+------------------
+[同步] rAthena官方Github库
+       https://github.com/rathena/rathena/commit/432dcda69503a7c5d5dda33d636d58b5f2d12c2d
+[升级] 若您不是全新安装的话, 请在您的【主数据库】上按顺序导入以下sql文件
+       - sql-files\upgrades\upgrade_20160814.sql
+[升级] 若您不是全新安装的话, 请在您的【日志数据库】上按顺序导入以下sql文件
+       - sql-files\upgrades\upgrade_20160814_log.sql
+[新增] 可以控制当NPC地震技能无法找到附近玩家时, 是否显示报错信息 (详见 conf/battle/extend.conf)
+[修正] rAthena官方BUG: 避免一处恶意构造封包可能会导致角色服务器崩溃的问题 (感谢“╰づ记忆•斑驳〤”反馈)
+
+v1.5.0(2016-08-12)
+------------------
+[同步] rAthena官方Github库
+       https://github.com/rathena/rathena/commit/9157318ee9939728b8d332a5668c13d4ad0a6f8b
+[新增] 复兴后的版本支持使用国际服(iRO)攻速公式, 详见 conf/battle/extend.conf 中的选项 (感谢“天书”实现)
+[新增] 当 combo_db 中定义了无效的 bonus 脚本后, 出错时能将具体的组合列出(如 1166:2527)
+[修正] 还原 mob_random_db.txt 为经典处理逻辑, 能在里面 import 其他文件 (感谢“好刀一把”反馈)
+[修正] rAthena官方BUG: 在 combo_db 中组合的道具刚好是同一位置的卡片和装备时(如: 20797:4174), 会导致此组合无效的问题 (感谢“天书”、“无忌”反馈)
+[调整] 导出九个类似 SC_MOONSTAR 的时装光环常量, 以便于在脚本中使用 (感谢“酷头”反馈)
+	   
+v1.4.9(2016-08-06)
+------------------
+[同步] rAthena官方Github库
+       https://github.com/rathena/rathena/commit/de2d8dc935dd0a8df5b2cbb279e60447716d2b67
+[新增] 实现外部数据库连接机制, 能够使用 query_multidb 指令来操作外部数据库
+[修正] 重写护身符系统, 解决在护身符的“使用脚本”中写 sc_start 系列指令会导致地图服务器崩溃的问题 (感谢"好刀一把"反馈)
+[修正] 还原 item_group_db.txt 为经典处理逻辑, 能在里面 import 其他文件 (感谢“好刀一把”反馈)
+[修正] 修正在 combo_db 中定义了无效的 bonus 会导致地图服务器崩溃的问题 (感谢“咪兔酱”反馈)
+[修正] 修正赋予 SC_GLOOMYDAY_SK 状态空参数的时候, 会导致地图服务器崩溃的问题 (感谢“咪兔酱”反馈)
+[调整] 能够对“游侠”使用 @bodystyle 指令来切换服装风格 (客户端必须有对应的图档, 否则会报错)
+	   
+v1.4.8(2016-07-15)
+------------------
+[新增] 同种类的护身符中, 第一个进入背包的将触发“穿戴脚本”, 最后一个离开背包的将触发“卸装脚本” (感谢“好刀一把”的建议)
+[修正] rAthena官方BUG: 自动拾取在 item_flag.txt 中配置掉落时公告的道具时, 不会公告的问题
+[修正] rAthena官方BUG: 组队的物品均分策略为“均等分配”的情况下, 获得 item_flag.txt 中配置掉落时公告的道具时, 不会公告的问题
+
+v1.4.7(2016-07-10)
+------------------
+[同步] rAthena官方Github库
+       https://github.com/rathena/rathena/commit/1f85dab1c523716d2bc469e02ed9cd47fccf9aa1
+[注意] 这次同步大概有 182 个 commit, 各位使用 rAthenaCN 的游戏管理员请谨慎测试后再更新(记得备份数据库)
+[升级] rAthena 官方调整了 db/[pre-]re/instance_db.txt 副本数据库的格式, 非全新安装的用户, 请手动对比升级.
+[升级] 若您不是全新安装, 且使用了SQL版本的物品和魔物数据库的话, 请在您的【主数据库】上按顺序导入以下sql文件
+       - sql-files\upgrades\upgrade_20160614.sql
+[新增] 能够固定指定魔物道具的基础掉率, 详见 db/mob_item_fixedrate.txt 配置文件
+[修正] rAthena官方BUG: 修复一个关于聊天室显示异常的问题(感谢"╰づ记忆•斑驳〤"反馈)
+
+v1.4.6(2016-06-18)
+------------------
+[新增] 实现 setheaddir 与 setbodydir 脚本指令, 用来控制角色的脑袋和身体朝向
+[新增] 添加“改变头部和身体朝向” 的演示脚本, 详见 npc/racn/racn_setdir.txt
+[调整] 为了方便调试, 默认不再开启“多开限制演示脚本”
+[调整] 将程序中写死的简体中文字符串, 提取到终端翻译数据库中, 方便进行繁体化配置
+[调整] 改进编码自动判断机制, 在繁体系统上链接到utf8/utf8mb4数据库时, 将采用big5编码
+[汉化] 完全汉化rA自制传送脚本 npc/custom/warper.txt (感谢“I'm Lins”汉化)
+[汉化] 汉化 conf 目录下10多个配置选项的说明信息
+[汉化] 更新终端汉化配置文件 conf/msg_conf/translation.conf
+
+v1.4.5(2016-06-10)
+------------------
+[新增] 支持对 pointshop 类型的商店设置变量的别名, 详见 npc/racn/racn_pointshop.txt
+[新增] 实现 OnIdentifiedItem 事件, 当玩家鉴定完成某件装备时触发, 详见 npc/racn/racn_events.txt
+[新增] 让 cashshop 类型的商店支持设置打折开关
+[修正] 若玩家正在进行离线挂店, 那么没有必要加入公会聊天频道(避免内存泄漏)
+[修正] 修正 setrenttime 和 getequipexpiretick 脚本指令错误(因rA更新EQI后导致装备位置获取错误)
+[调整] 对 OnMvpKillEvent 事件的参数以及关联执行玩家做了调整, 详见 npc/racn/racn_events.txt
+[调整] 标题栏显示流量信息的时候, 只保留到小数点后两位
+[调整] 重命名启动批处理文件和作者名称列表文件(避免出现中文文件名, 对繁体系统友好)
+[调整] 更新作者名单, 加入 rAthena 英文原版开发团队和成员的名称
+[汉化] 更新终端汉化配置文件 conf/msg_conf/translation.conf
+
+v1.4.4(2016-05-31)
+------------------
+[修正] 回滚 rAthena 官方对“NPC地崩”技能做出的更改(由于伤害与历史版本相比较误差太大)
+[调整] 护身符类道具(类型编号为20)调整为可堆叠道具, 以便被 item_stack 控制同时携带的数量
+[调整] 为 20131223 客户端默认分配一个高强度封包混淆密钥
+[汉化] 更新终端汉化配置文件 conf/msg_conf/translation.conf
+
+v1.4.3(2016-05-27)
+------------------
+[新增] 能够在查看其它玩家装备的时隐藏其时装外观, 详见 conf/battle/extend.conf 中的配置
+[调整] 回滚“解决物品放到手推车后必须小退才能挂店”的代码
+[汉化] 完成指令帮助文件 conf/help.txt 的汉化
+
+v1.4.2(2016-05-23)
+------------------
+[同步] rAthena官方Github库
+       https://github.com/rathena/rathena/commit/631187b3ec7c73dde9f2db662add30d3b7f0519f
+[注意] 已经有两个月没和rA官方进行同步, 这次同步大概有220多个 commit, 各位使用 rAthenaCN 的游戏管理员请谨慎测试后再更新(记得备份数据库)
+[注意] rA官方调整了魔物 mode 取值的含义, 如果脚本有根据魔物的mode来做出特定逻辑的话, 请注意更新
+[注意] rA官方调整了 npctalk 指令的行为, 现在使用 npctalk 不会自动显示出NPC的名称, 相关的脚本更新请注意
+[注意] rA官方现在支持在 conf/battle/drops.conf 中单独调整 MVP 系列魔物的物品掉率(不再和BOSS类型的魔物混在一起)
+[升级] 若您不是全新安装的话, 请执行以下操作:
+       - 请安装 ActivePerl 之后, 执行 tools/convert_monstermode.pl 脚本(用来转换魔物数据库中的 mode 字段)
+       - 若不知道如何操作, 到时候在群里发问吧(暂时来不及写教程)
+[新增] 从此版本开始, rAthenaCN 支持新职业“杜兰族召唤师”
+[新增] 实现多线路支持机制, 详情请见 conf/multinet_athena.conf
+[定制] 关闭正则表达式的定制支持(rA官方为默认启用, 提供定制意义不大)
+[定制] 从此版本开始, 客户端封包定制支持到 20151104 版本
+
+v1.4.1(2016-05-13)
+------------------
+[新增] 实现护身符系统, 只需将物品类型设置为20, 那么道具放入背包将立刻触发使用脚本
+[新增] 实现 instance_users 指令, 可以获取指定副本中的参与人数(感谢“Sariel”实现)
+[新增] 实现 openbank 指令, 可以让角色打开银行界面(感谢“Sariel”实现)
+[新增] 实现 party_leave 脚本指令, 能让玩家退出队伍(感谢“Sariel”实现)
+[新增] 实现 mesclear 指令, 能在不需要玩家点NEXT的情况下, 清空NPC的对话窗口(感谢“晓晓”实现)
+[新增] 支持定制“宠物数据库的容量上限”
+[修正] 修正 getsameipinfo 指令无法返回正确结果的问题
+[调整] 调整复兴前的地图缓存, 使用符合rA自带脚本的老版依斯鲁德岛缓存
+[调整] 若终端翻译数据库不存在, 程序启动时也不要报错, 直接显示英文就好
+[汉化] 完全汉化德瓦他 47 个城镇NPC的对话内容(感谢“杨梅”翻译)
+[汉化] 完全汉化“达纳托斯之塔”的所有对话 - 尚未精校(感谢“Ivan”翻译)
+[汉化] 完全汉化 conf/subnet_athena.conf 的注释说明
+[汉化] 完全汉化角色服务器配置文件 conf/char_athena.conf
+[汉化] 部分汉化 conf/help.txt 中的GM指令说明信息
+[汉化] 汉化 conf/battle/party.conf 中 display_party_name 选项的注释
+[汉化] 更新终端汉化配置文件 conf/msg_conf/translation.conf
+
+v1.4.0(2016-04-29)
+------------------
+[新增] 实现 @eventrpt 指令, 可查看服务端启动至今所有事件的触发次数和处理耗时, 方便进行简单的脚本性能诊断
+[新增] 实现 mobremove 脚本指令, 根据指定的GID, 在不杀死魔物的情况下将魔物从地图中移除(感谢“ ★╮喵玲兒〃☆ ”分享)
+[新增] 实现 max/min 两个脚本指令, 能够返回给定的多个数中 最大/最小 的那一个
+[新增] 实现 cap_value 脚本指令, 能够让指定的数值不超过你指定的最小值和最大值范围
+[新增] 实现 getsameipinfo 脚本指令, 可获得与指定IP相同的玩家数量和他们的CID\AID\角色名信息
+[新增] 实现 logout 脚本指令, 可以用特定的理由把玩家踢下线
+[新增] 增加“多开限制演示脚本”, 详见 npc/racn/racn_iplimit.txt
+[新增] 使玩家的行为策略所设置的掉率倍率, 能同时应用到他的宠物、生命体、佣兵的掉率上
+[新增] 使用@who和@whomap可以看到玩家的行为策略编号
+[修正] rAthena官方BUG: 当读取 libconfig 配置文件失败时, 能够显示出文件的路径, 而不是单纯的显示I/O错误
+[调整] 改变 console_msg_log 选项的默认值, 默认记录“警告、错误、调试”信息到log目录中去
+
+v1.3.9(2016-04-25)
+------------------
+[修正] 紧急修正 v1.3.8 版本一个触发概率较高的崩溃(感谢"尐駒頭寶寶"反馈)
+
+v1.3.8(2016-04-24)
+------------------
+[新增] 实现账号行为策略机制, 可将账号分组并按照分组给予不同的经验和掉率策略
+[新增] 让 npctalk 脚本指令能够支持指定NPC名称
+[新增] 实现 delinventory 脚本指令, 可删除指定背包序号的物品
+[新增] 实现 equipinventory 脚本指令, 可穿戴指定背包序号的装备
+[新增] 实现 unequipinventory 脚本指令, 可脱下指定背包序号的装备
+[新增] 实现 getinventoryinfo 脚本指令, 可以查看指定背包序号的物品信息
+[新增] 实现 viewequip 脚本指令, 可以查看指定账号玩家的装备信息
+[新增] 实现 existitem 脚本指令, 可以确认一个道具在物品数据库中是否存在(为了兼容SeAr脚本)
+[新增] 使用 getinventorylist 脚本指令时, 能返回一个名为 @inventorylist_idx 的数组, 里面包含了每个物品的背包序号
+[新增] 实现 searcharray 脚本指令, 用来搜索数组内容(感谢 ★╮喵玲兒〃☆ 分享, 感谢 Sariel 改进)
+[新增] 编码自动判定机制支持utf8mb4类型的数据库
+[修正] rAthena官方BUG: 修正在 OnPCLoginEvent、OnPCLoadMapEvent 事件中使用 setquest 时, 特定条件下地图服务器会崩溃的问题(感谢“霹雳爆炸妞儿”反馈)
+[修正] rAthena官方BUG: 解决使用 @item2 指令创建影子装备时, 若指定数量大于 1 会出现错误的问题 [Sariel]
+[修正] rAthena官方BUG: 解决当获得魔物变身状态后, 过图后状态图标的倒计时丢失的问题 [Sariel]
+[调整] 统一conf目录下所有配置文件的头部注释信息格式
+[调整] 让 @bodystyle 指令支持更改“大主教”的服装风格
+
+v1.3.7(2016-04-14)
+------------------
+[修正] rAthena官方BUG: 解决角色服务器存档流氓、逐影的技能时可能会出现 -8 报错的问题
+[修正] rAthena官方BUG: 修正角色服务器掉线后恢复, 会导致离线挂店表被清空的问题
+[修正] rAthena官方BUG: 解决道具商城下架商品后, 若有玩家购买下架商品会导致地图服务器崩溃的问题
+[修正] 修正获取VIP状态的时机, 避免频繁从登录服务器请求VIP状态
+[修正] 解决item_flag中为道具设置上 256 标记后将其丢到地面, 道具不会被扣除的问题(将导致道具复制)
+
+v1.3.6(2016-04-08)
+------------------
+[新增] 当packet_db.txt的packet_db_ver为auto的话, 能自动选择匹配的封包版本
+[新增] getequipexpiretick 脚本指令, 用来获得指定位置装备的租赁到期剩余秒数(兼容SeAr的isrental指令)
+[新增] battleignore 脚本指令, 可用来设置玩家避免被魔物攻击
+[新增] setrenttime 脚本指令, 用来增加/减少指定位置装备的租赁时间(兼容SeAr的resume指令)
+[修正] 让socket工作在非阻塞模式, 并解决在Win系统上设定连接的超时时间不正确的问题
+[修正] rAthena官方BUG: 修正 rAthena 道具的租赁剩余时间提示可能显示多次的问题
+[调整] 改进当程序崩溃时转储文件的生成机制, 不再使用 eAthena 的插件机制
+[调整] 调整conf目录中注释的标点符号, 除了引号外, 中文标点符号统一改成英文标点符号
+[汉化] 更新终端汉化配置文件 conf/msg_conf/translation.conf
+
+v1.3.5(2016-04-01)
+------------------
+[新增] 增加 bonus_script_remove 脚本指令, 用来移除指定的单个 bonus_script (感谢“好刀一把”的建议)
+[新增] 若IP在 packet_athena.conf 的白名单列表中, 就算对方频繁发起连接, 也不显示其DDOS攻击和关闭连接的提示
+[修正] 解决 inter_athena.conf 中 log_db_ip 地址超长时报错的问题 (感谢“至尊宝”反馈)
+[调整] 移除tools目录中3个玩家不需要使用的perl脚本文件
+[调整] 将魔物名称显示的体型、种族、属性文本提取到配置文件中, 方便繁体化 (感谢“瓜瓜”建议)
+[汉化] 完全汉化“料理任务”, NPC名称参考自CRO (感谢“杨梅”汉化)
+[汉化] 更新终端汉化配置文件 conf/msg_conf/translation.conf
+
+v1.3.4(2016-03-26)
+------------------
+[新增] 增加 status_calc 脚本指令, 用来重算玩家的状态(兼容 statuscalc)
+[新增] 为 item_flag.txt 扩充了道具“不会被玩家使用而消耗”和“不会被技能消耗”的两个选项
+
+v1.3.3(2016-03-20)
+------------------
+[同步] rAthena官方Github库
+       https://github.com/rathena/rathena/commit/1ca9fb58f21bd7ea3a5ea1b6f6de1b22cc086a60
+[新增] 使用 mobinfo 地图标记, 可为每张地图单独配置魔物名称显示的附加信息
+[新增] 使用 sethotkey 和 gethotkey 脚本指令来设置和获取快捷键 (兼容 get_hotkey 和 set_hotkey)
+[修正] 修正事件演示脚本中的一处注释错误(感谢“徐葛阁”指出)
+[修正] 解决“OnSomeOneEnterChatRoom”演示脚本中提到的脚本路径错误问题(感谢“ぎ冇葥圖じ”指出)
+[汉化] 完全汉化异世界首都“艾尔迪卡斯特”的电梯和城镇NPC(感谢“杨梅”汉化)
+[汉化] 完全汉化中和剂、混合剂的制作任务(感谢“杨梅”汉化)
+[汉化] 汉化使用 @mapinfo 指令的回显信息
+
+v1.3.2(2016-03-11)
+------------------
+[新增] 现在乘坐“商城坐骑”也可以使用苍蝇翅膀等类型为11的“延迟消耗类物品”
+[新增] 在 conf/battle/extend.conf 中的 cash_mounting_use_item_limit 选项也可以对 11 类型的道具进行限制
+[新增] 让@recall命令(也只有@recall命令)可以召唤离线挂店的玩家(方便挪动他们的位置)
+[修正] 解决item_flag中配置的物品掉落公告魔物名称始终为英文的问题(感谢“依然灬落訫”反馈)
+[修正] 解决 rare_drop_announce 选项无效的问题(感谢“依然灬落訫”反馈)
+[汉化] 汉化 conf/battle/pet.conf 中两个选项的说明 (感谢“BOOGIEJIA”协助)
+[汉化] 汉化 conf/battle/player.conf 中的2个选项说明
+[汉化] 汉化位于“alberta,26,229”的兔耳发圈任务NPC (感谢“杨梅”翻译)
+
+v1.3.1(2016-03-04)
+------------------
+[新增] 新增 nocapture 地图标记, 可以防止玩家捕捉宠物(禁止使用时, 不会扣除捕捉道具)
+[新增] 通过monster脚本指令召唤出绑定了死亡事件的魔物后, 魔物死亡也可以获得魔物的死亡坐标
+[新增] 使halt支持“OnPCChangeTitleEvent”事件, 现在双击装备窗口的“Title Release”会有示例脚本
+[新增] 新增 noautoloot 地图标记, 可以禁止在特定地图上使用“自动拾取”机制
+[汉化] 汉化复兴前与复兴后艾尔贝塔港口处的NPC名称 (感谢“杨梅”翻译)
+
+v1.3.0(2016-02-26)
+------------------
+[新增] 实现2015客户端的称号机制(部分实装, 但已够用), 详见 npc/racn/demo/racn_title.txt
+[新增] 新增称号变更事件“OnPCChangeTitleEvent”, 详见 npc/racn/demo/racn_events.txt
+[新增] 新增“@recallmap”指令, 用来召唤当前地图的玩家
+[新增] 新增“notoken”地图标记, 用来禁止在某地图上使用“不死之证”进行原地复活
+[新增] 触发OnNPCKillEvent事件时, 能通过@mob_dead_x和@mob_dead_y获取魔物死亡时的坐标
+[新增] 支持使用 @bodystyle 设置“皇家卫士”的服装风格(请配合具有相关图档的客户端使用)
+[修正] rAthena官方BUG: 解决由于 instance_db 导致的一个内存泄露问题 (感谢“CK”反馈)
+[修正] 扩大地面技能计时器的容量, 降低“tickset is full”的报错概率 (感谢“★╮喵玲兒〃☆”指出)
+[汉化] 优化“hide_woe_damage”选项的描述
+[汉化] 优化 conf/login_athena.conf 中几个选项的描述
+[汉化] 完全汉化“副本数据库”的说明 db/[pre-]re/instance_db.txt
+[汉化] 完全汉化“物品堆叠限制数据库”的说明 db/item_stack.txt
+[汉化] 更新终端汉化配置文件 conf/msg_conf/translation.conf
+[调整] 调整 rAthenaCN 开发团队撰写的示例脚本存放位置到 npc/racn 目录中
+
+v1.2.9(2016-02-21)
+------------------
+[调整] 解决开启VIP机制的情况下, 定制仓库容量错误的问题(感谢“好刀一把”反馈)
+
+v1.2.8(2016-02-18)
+------------------
+[同步] rAthena官方Github库
+       https://github.com/rathena/rathena/commit/9f0ae128247f070eb15eff74f28b25d0e8474e0e
+[新增] 新增 @adopt 指令, 可对指定玩家发起领养请求(解决2015客户端无法出现领养菜单的临时方案)
+[新增] 新增“script4each”脚本指令, 对指定范围的玩家执行相同的一段脚本
+[新增] 若没有自定义客户端版本的话, 终端能够显示出现在程序配套的客户端版本是多少
+[新增] 当没有权限的玩家执行了GM指令时, 默认不会将消息发出去(感谢“天兔-大坏”的建议)
+[新增] 支持定制公会人数上限和“扩充组合体制”每级提升的人数
+[新增] 支持定制“声望列表的长度上限”
+[新增] 支持定制“魔物数据库的ID上限”
+[新增] 支持定制“仓库可存放的物品种类上限”
+[修正] rAthena官方BUG: 启用VIP机制后, 只有登录时才会显示倍率信息, 过图不再显示
+[修正] rAthena官方BUG: 当 bone_drop 为 2 时, 死亡不会掉骷髅头的问题
+[修正] rAthena官方BUG: 解决 item_cash_db.txt 中字段不足时, 会导致地图服务器崩溃的问题
+[修正] rAthena官方BUG: 使用“定位陷阱”捉住玩家或魔物的话, 最短定位时长修正为4秒(之前是5秒).
+[修正] 解决“定位陷阱”抓住玩家后, 定位的持续时间异常问题(感谢“天兔-大坏”反馈)
+[修正] 解决 @refreshnpc 和 @unloadnpcfile 无法处理纯function脚本文件的问题.
+[修正] 优化崩溃处理逻辑, 使服务端在崩溃后可以做一些安全处理
+[汉化] 完全汉化“状态禁用数据库”的说明 db/status_disabled.txt (rAthena新增的一个数据库)
+[汉化] 完全汉化位于“payon,173,141”的“重力圣人”
+[汉化] 完全汉化出入深渊之湖中央的相关NPC (感谢“杨梅”汉化)
+[汉化] 完全汉化从“里希塔乐镇贫民区”进入“研究所”的下水道管对话 (感谢“杨梅”汉化)
+[汉化] 完全汉化GVG攻城脚本中“城堡管理员”的姓名(感谢“饼饼 Wing075”指出)
+[汉化] 完全汉化一些复兴后新城镇的卡普拉职员(感谢“饼饼 Wing075”指出)
+[汉化] 完全汉化卡普拉移动仓库使用券的对话, 以及传送卷轴的目的地名称(感谢“饼饼 Wing075”分享)
+[汉化] 粗糙汉化了图书馆的对话内容和各城市的看板 (感谢“杨梅”汉化)
+[汉化] 汉化2015-08月份客户端中, 商人新增的“装饰手推车”技能, 技能编号为2544
+[汉化] 汉化 battle 目录中 18 个选项的使用说明
+[汉化] 更新终端汉化配置文件 conf/msg_conf/translation.conf
+[调整] 移除所有未被粗糙汉化的脚本, 避免 rough 目录过度臃肿重复
+[调整] 统一部分地图名称的叫法(比如“伊斯鲁德岛”统一成“依斯鲁得岛”)
+[调整] 优化“声望列表的长度设置”的说明, 感谢“懒一辈子”指出错误
+[调整] 优化卡普拉职员的对话内容
+[调整] 归一处理, “素质点数”统一汉化换成“能力点数”
+[调整] 优化 battle/guild.conf 中部分选项的说明
+[调整] 调整“元素属性伤害调整数据库”的中文逗号, 改用英文逗号
+[感谢] 感谢“杨梅”和“饼饼 Wing075”对 rAthenaCN 的贡献, 已列入“rAthenaCN 作者名单”
+
+v1.2.7(2016-01-28)
+------------------
+[修正] v1.2.6 版本存在用手推车刷道具的可能性(感谢 阿神ˇ 反馈)
+
+v1.2.6(2016-01-23)
+------------------
+[同步] rAthena官方Github库
+       https://github.com/rathena/rathena/commit/30395fa9cf607cd30dcbb098ba014675d16d8a2a
+[新增] 新增@refreshnpc指令, 可以指定刷新某一个NPC文件
+[修正] rAthena官方BUG: 服务端运行时, MySQL掉线重连后带来的编码错乱问题(感谢 紫月-大坏 反馈)
+[修正] rAthena官方BUG: 放到手推车的物品不能立刻挂店出售, 必须小退之后才可以的问题
+[调整] 将 192.168 开头的IP地址和 127.0.0.1 默认放入DDOS白名单
+[汉化] 汉化使用@unloadnpcfile指令的回显信息
+[汉化] 汉化使用@mapflag指令的回显信息
+
+v1.2.5(2016-01-15)
+------------------
+[同步] rAthena官方Github库
+       https://github.com/rathena/rathena/commit/3a8aac4fb0d4ce56b6057facd35ba3579b78ed7a
+[修正] 修正定制“自动拾取的物品清单上限”超过256之后, 打死魔物掉落物品时地图服务器会假死的问题(感谢可乐鸡翅)
+[调整] 调整一下 conf/packet_athena.conf 中的说明
+[汉化] 修改 conf/battle/client.conf 与“服装风格”有关的选项描述
+
+v1.2.4(2016-01-13)
+------------------
+[同步] rAthena官方Github库
+       https://github.com/rathena/rathena/commit/88d2cd7cfd2fe0516b926cd568a39b9bf0d3cfbe
+[说明] v1.2.3版本中外国人搞坏了一个基础功能, 推荐都升级到v1.2.4上来
+[说明] 从v1.2.4开始, 支持dressroom机制, 不过客户端版本号需要大于等于20150513, 且数据文件要支持才可以使用
+[升级] 若您不是全新安装的话, 请在您的【主数据库】上按顺序导入以下sql文件
+       - sql-files\upgrades\upgrade_20160112.sql
+[新增] 新增能关联到玩家的 OnSomeOneEnterChatRoom 事件, 具体用法请见“事件演示脚本”
+[调整] 补充一些敏感词条 db/manner.txt
+[汉化] 汉化 conf/battle/client.conf 中的几个选项说明
+[汉化] 更新终端汉化配置文件 conf/msg_conf/translation.conf
+
+v1.2.3(2016-01-08)
+------------------
+[同步] rAthena官方Github库
+       https://github.com/rathena/rathena/commit/315056b02ef9e132443efe16e7a7e7ba01255ba4
+[升级] 若您不是全新安装, 且使用了SQL版本的物品和魔物数据库的话, 请在您的【主数据库】上按顺序导入以下sql文件
+       - sql-files\upgrades\upgrade_20160106.sql
+       - 本周 rAthena 官方修改的物品、魔物以及魔物技能数据库内容较多, 建议重新导入
+[升级] 若您不是全新安装的话, 请在您的【日志数据库】上按顺序导入以下sql文件
+       - sql-files\logs.sql
+[新增] 新增服务端级别的“聊天内容敏感词过滤机制”, 详见 conf/battle/extend.conf 中的配置
+[新增] 新增一个 @reloadmannerdb 指令, 用来重新加载敏感词库
+[修正] rAthena官方BUG: 使用 @ban 指令封禁账号时, 登录服务器显示的提示内容错误的问题
+[修正] rAthena官方BUG: 解决当玩家被GM禁言之后, 角色过图、重新进入游戏会导致身上的红色禁言图标丢失的问题
+[修正] rAthena官方BUG: 修正一处关闭登录服务器时, 程序会崩溃的问题
+[调整] 调整技能数据库的汉化方式, 保留技能英文名, 方便对照(感谢★╮喵玲兒〃☆的建议)
+[汉化] 更新终端汉化配置文件 conf/msg_conf/translation.conf
+	   
+v1.2.2(2016-01-01)
+------------------
+[同步] rAthena官方Github库
+       https://github.com/rathena/rathena/commit/118fa28ae9ac832e89968ce214c27b17d780027d
+[新增] 实现玩家开始移动事件“OnPCMoveEvent”（支持配置玩家移动事件(OnPCMoveEvent)的触发方式）
+[新增] 新增“OnPCBeforeLoadMapEvent”, 当玩家准备过图时触发
+[修正] 内码表自动判定机制升级, 对字符集为gbk或big5的MySQL数据库更加友好
+[修正] rAthena官方BUG: 在 db/pre-re/skill_require_db.txt 的第 886 行少了一个字段的问题
+[汉化] 优化一下 conf/battle/guild.conf 中 guild_notice_changemap 选项的注释说明
+[汉化] 修改 db/item_announce.txt 的说明
+[汉化] 优化“兽人的记忆”副本的几行对话
+[汉化] 能够自动翻译 db 目录下除了 skill_cast_db 之外以 skill_ 开头的12个db文件中的技能名
+[汉化] 汉化 conf/battle/client.conf 中 hide_woe_damage 选项的说明
+[汉化] 更新终端汉化配置文件 conf/msg_conf/translation.conf
+
+v1.2.1(2015-12-25)
+------------------
+[新增] 支持定制“自动拾取的物品清单上限”
+[新增] 支持定制“启用正则表达式支持”
+[新增] 支持定制“在标题中显示流量信息”
+[新增] 当服务端崩溃时, 能够自动生成崩溃报告文件
+[修正] 使用弓身弹影使用的时候, 角色头上要显示“弓身弹影”文字
+[修正] 修正和NPC对话时立刻使用 callshop 来打开商店的“购买/出售”选择页面后, 点击“购买/出售”选项无效的问题
+[汉化] 完全汉化“元素属性伤害调整数据库” db/[pre-]re/attr_fix.txt
+[汉化] 汉化 conf/battle/battle.conf 中 5 个选项的注释说明
+[汉化] 更新终端汉化配置文件 conf/msg_conf/translation.conf
+
+v1.2.0(2015-12-21)
+------------------
+[同步] rAthena官方Github库
+       https://github.com/rathena/rathena/commit/d8830d21f69c9f6b7577ef13b8ffbe3b348ceff8
+[修正] rAthena官方BUG: 启动地图服务器时提示 Invalid sc group "SC_SEARCH_STORE_INFO" 的问题
+[汉化] 更新终端汉化配置文件 conf/msg_conf/translation.conf
+
+v1.1.9(2015-12-20)
+------------------
+[同步] rAthena官方Github库
+       https://github.com/rathena/rathena/commit/9aa832570e997423937b1be9bd42ce90bc7039ae
+[修正] 修正编码自动判定系统在检测到 default_codepage 不是 auto 的时候, 不会将用户指定具体编码应用到连接的问题
+[汉化] 更新终端汉化配置文件 conf/msg_conf/translation.conf
+
+v1.1.8(2015-12-18)
+------------------
+[同步] rAthena官方Github库
+       https://github.com/rathena/rathena/commit/b53eacd7b24eb20cdf8c7b32630f1135b8485f63
+[新增] 支持自动探测编码, 并修改字符集来进行自动适应, 减少新手解决中文乱码问题的难度
+[新增] 解决连接阿里云RDS数据库时, 由于RDS域名过长带来的连接错误问题
+[新增] 实现 OnPCUseSkillEvent 和 OnPCUseSkillFinishEvent 事件, 当玩家使用技能之前/之后触发
+[新增] 实现 OnPCUseItemEvent 和 OnPCUseItemFinishEvent 事件, 当玩家使用物品之前/之后触发
+[新增] 支持定制“玩家随身携带的金币上限”以及“背包中的物品种类上限”
+[新增] 添加“extremityfist_spiritball_strict”选项, 用来在阿修罗霸凰拳咏唱完毕后, 是否再次判定气弹数量是否达标, 若不达标则技能使用失败
+[新增] 添加“extremityfist_explosion_strict”选项, 用来在阿修罗霸凰拳咏唱完毕后, 是否再次判定爆气状态是否存在, 若不存在则技能使用失败
+[修正] rAthena官方BUG: 彻底解决20130807和20150513全版本在使用callshop直接打开购买/出售页面时玩家可以移动的问题
+[修正] rAthena官方BUG: 针对MVP魔物显示大血条后, MVP魔物受到攻击时, 血条不更新的问题
+[修正] 解决有玩家在副本的时候, 关闭地图服务器会导致奔溃的问题 [感谢晓晓修正]
+[修正] 解决复兴前版本会提示找不到 novice_skills.txt 脚本文件的问题
+[汉化] 更新终端汉化配置文件 conf/msg_conf/translation.conf
+
+v1.1.7(2015-12-11)
+------------------
+[同步] rAthena官方Github库
+       https://github.com/rathena/rathena/commit/b2b37fc3ae2da89122df43b27ed579734e0ca916
+[新增] 增加 warpparty2 脚本指令, 与 warpparty 用法一致, 但能够传送已经死亡的队员
+[新增] 支持定制 事件队列的容量上限(MAX_EVENTQUEUE)
+[新增] 新增脚本指令 sc_check 为老脚本提供支持, 但更推荐使用 rAthena 官方自带的 getstatus 指令
+[修正] 修正当HP大于11万时, 10级虎炮不扣血的问题
+[修正] 解决版本大于等于 20131223 的客户端, 使用callshop直接打开购买/出售页面时玩家可以移动的问题
+       版本号小于 20131223 的客户端暂时没找到好的解决办法
+[汉化] 汉化五个 conf 文件中, 共 18 个选项的注释说明
+
+v1.1.6(2015-12-06)
+------------------
+[同步] rAthena官方Github库
+       https://github.com/rathena/rathena/commit/8b3b32e0007255bd7cde1a936bd006cc7e66f7b7
+[新增] 此版本开始, 支持“私人定制”编译
+[提示] rAthena已经整合了复兴后的“克里图拉学院”, 现在复兴后的出生点在“船上”
+
+v1.1.5(2015-11-27)
+------------------
+[同步] rAthena官方Github库
+       https://github.com/rathena/rathena/commit/25cb15161f00e636a1cd4091f7784c1877143e78
+[新增] 此版本开始支持2015-05-13客户端
+       如需使用, 请将“2015-05-13”目录中的文件复制出来, 覆盖到服务端目录下即可
+[修正] 修正 cash_mounting_use_item_limit 选项无法限制“影子装备”的问题
+[调整] 调整 cash_mounting_use_item_limit 选项的说明
+[汉化] 粗糙汉化大约 573 个NPC, 感谢网友提供（应其要求, 不公开其网名）
+[汉化] 粗糙汉化学习“收购商店”技能的“修先生”和“黑市商人”
+[汉化] 更新终端汉化配置文件 conf/msg_conf/translation.conf
+
+
+v1.1.4(2015-11-20)
+------------------
+[新增] 添加 rAthenaCN 免责声明
+[新增] 添加 force_identified 选项, 能够强制从特定渠道获得的装备, 自动变成“已鉴定”
+[新增] 添加 cash_mounting_use_item_limit 选项, 在乘坐“商城坐骑”时禁止使用特定类型的物品
+[修正] 解决魅影的“人孔”技能在只剩下2秒的情况下, 孔住一个人之后需要15秒这个人才能逃脱的问题
+[修正] 修正当“极限空虚|黑暗陷阱”被提前解除后, 被其效果影响的单位无法立刻解除负面效果的问题
+[修正] 修正玩家不会被元素使的“极限空虚|黑暗陷阱”吸到旋风中央的问题
+[修正] 让“疯狂野草”能够取消元素使的“极限空虚|黑洞陷阱”技能
+[调整] 将 @showzeny 的回显信息抽出到 conf/msg_conf/racn_map_msg.conf 方便进行汉化
+[调整] 将 @showexp 的回显信息抽出到 conf/msg_conf/racn_map_msg.conf 方便进行汉化
+[调整] 扩大单个角色同一时间能够拥有的“自动念咒”数量
+[调整] 拓展事件测试脚本中, 加入 rAthena 官方事件 OnPCStatCalcEvent 的示例说明
+[汉化] 完全汉化和GM指令相关的战斗配置文件 conf/battle/gm.conf
+[汉化] 部分汉化“地图服务器的消息配置文件”顶部的注释 conf/msg_conf/map_msg.conf
+[汉化] 更新终端汉化配置文件 conf/msg_conf/translation.conf
+
+v1.1.3(2015-11-13)
+------------------
+[新增] 新增 “物品掉落公告配置文件” db/item_announce.txt
+[升级] 若您不是全新安装的话, 请重命名以下文件
+       - conf/msg_conf/import/map_msg_eng_conf.txt 重命名为 map_msg_chs_conf.txt
+[修正] 当 show_mob_info 选项为 6 时, 魔物名称格式显示错误的问题, 感谢 wf7admin 上报
+[调整] 事件队列的容量从2增加到200, 以便减少队列满的情况
+[调整] 精简conf/msg_conf/目录下多余的信息配置文件, 只留下简体中文和繁体中文
+[汉化] 更新终端汉化配置文件 conf/msg_conf/translation.conf
+
+v1.1.2(2015-10-30)
+------------------
+[同步] rAthena官方Github库
+       https://github.com/rathena/rathena/commit/ea497b2938e51a526438f78aa6fc4de43af5cc23
+[新增] 添加4个和人工生命体相关的事件, 包括召唤、安息、死亡、复活
+[调整] 关闭NPC超时检测机制, 避免玩猜数字等游戏等太久NPC自动关闭的问题
+[调整] 调整“角色服务器配置文件”的一些注释结果
+[汉化] 自动汉化所有野外魔物召唤文件(npc/mobs | npc/re/mobs | npc/pre-re/mobs)
+[汉化] 完全汉化“兽人的记忆”副本
+[汉化] 完全汉化拍卖行的向导人员和拍卖师
+[汉化] 完全汉化打孔工程师“世雅布莲”
+[汉化] 汉化地图服务器黑框中, 关于创建和销毁副本的黑框提示信息
+
+v1.1.1(2015-10-23)
+------------------
+[同步] rAthena官方Github库, Git Hash：e0b24fc670a3f2a056117746f79b7f90a999dd40
+[新增] 添加“人工生命体升级”事件 OnPCHomLvUpEvent, 具体用法请见“事件演示脚本”
+[新增] 添加“穿戴装备”事件 OnPCEquipEvent, 具体用法请见“事件演示脚本”
+[新增] 添加“脱下装备”事件 OnPCUnequipEvent, 具体用法请见“事件演示脚本”
+[新增] 添加“获得状态”事件 OnPCSCStartEvent, 具体用法请见“事件演示脚本”
+[新增] 添加“解除状态”事件 OnPCSCEndEvent, 具体用法请见“事件演示脚本”
+[新增] 添加“创建队伍”事件 OnPCPartyCreateEvent, 具体用法请见“事件演示脚本”
+[新增] 添加“加入队伍”事件 OnPCPartyJoinEvent, 具体用法请见“事件演示脚本”
+[新增] 添加“离开队伍”事件 OnPCPartyLeaveEvent, 具体用法请见“事件演示脚本”
+[新增] 添加“创建公会”事件 OnPCGuildCreateEvent, 具体用法请见“事件演示脚本”
+[新增] 添加“加入公会”事件 OnPCGuildJoinEvent, 具体用法请见“事件演示脚本”
+[新增] 添加“离开公会”事件 OnPCGuildLeaveEvent, 具体用法请见“事件演示脚本”
+[新增] 添加“宠物拾取道具”事件 OnPetLootItemEvent, 具体用法请见“事件演示脚本”
+[新增] 添加“给宠物喂食”事件 OnPCFeedPet & OnPCFoodPet, 具体用法请见“事件演示脚本”
+[新增] 添加“查看其它玩家装备”事件 OnPCViewEquipEvent, 具体用法请见“事件演示脚本”
+[新增] 将创建公会时的职位名称提取成配置文件, 可在 conf/msg_conf/char_msg_racn.conf 中修改
+[调整] 将未完全汉化的脚本复制一份到rough目录, 为粗糙汉化做准备
+[调整] 默认加载事件演示脚本, 若想关闭请编辑 npc/scripts_custom.conf 配置文件
+[汉化] 汉化复兴后版本中, 依斯鲁德岛4张镜像地图的“邮件筒”NPC名称
+[汉化] 更新 conf/char_athena.conf 中 char_new_display 选项的说明
+[汉化] 汉化宠物战斗信息配置文件中的部分选项 conf/battle/pet.conf
+[汉化] 汉化 conf/battle/exp.conf 中关于死亡经验惩罚相关选项的说明
+[汉化] 更新终端汉化配置文件 conf/msg_conf/translation.conf
+
+v1.1.0(2015-10-16)
+------------------
+[新增] 服务器黑框中能显示出 rAthenaCN 的版本号
+[新增] 携带 rAthenaCN 专用的 LeeStarter 启动管理器(需安装微软的.Net Framework 4.0框架才能运行)
+[新增] 杀死MVP魔物时, 会触发与玩家无关联的 OnMvpKillEvent 事件
+[新增] 使用 @reloadscript 刷新NPC之前, 会触发与玩家相关联的 OnBeforeReloadScript 事件
+[新增] 使用 @reloadscript 刷新完NPC后, 会触发与玩家相关联的 OnAfterReloadScript 事件
+[新增] 添加 rAthenaCN 拓展事件的演示脚本, 位于 npc/custom/rAthenaCN_Events_Tester.txt
+[调整] 您可以通过编辑 npc/scripts_custom.conf 文件来启用“拓展事件演示脚本”
+[调整] 将 rAthenaCN 自定义的信息配置文件独立出来放到 conf/msg_conf/map_msg_racn.conf
+[修正] rAthena官方BUG: 修正复兴前(pre-re)的依斯鲁德岛地图缓存(map_cache.dat)不正确的问题 (需配合新的登录补丁)
+[汉化] 汉化宠物数据库 db/(pre-)re/pet_db.txt 中的宠物名称
+[汉化] 更新终端汉化配置文件 conf/msg_conf/translation.conf
+[汉化] 完全汉化复兴前\复兴后的普隆德拉导游人员
+[汉化] 校验并优化位于“airplane_01,33”的“克拉莉斯”(飞空艇骰子游戏人员)
+
+v1.0.9(2015-10-09)
+------------------
+[同步] rAthena官方Github库
+       https://github.com/rathena/rathena/commit/fd7d6c31fdae22ab951b2d8acb86117fc0869b8c
+[新增] 可以设置强制触发 OnPCLoadMapEvent 事件 (conf/battle/extend.conf 的 force_loadevent 选项)
+[汉化] 完全汉化位于“hu_in01,381,304”的“猎鹰饲养员”
+[汉化] 完全汉化来往绵绵岛的传送NPC“猫绵绵”、“猫奥克”和“猫豆豆”
+[汉化] 完全汉化“召唤生命体”所召唤出来的生命体默认名称
+[汉化] 完全汉化“元素精灵”的默认名称
+[汉化] 完全汉化战斗配置文件 conf/battle/battle.conf 中 arrow_decrement 选项的描述
+[汉化] 汉化sql-files目录中4个与mob_db相关的sql文件
+
+v1.0.8(2015-10-07)
+------------------
+[同步] rAthena官方Github库
+       https://github.com/rathena/rathena/commit/81662aaceec44b653b1aaaa143ca2e75d51ad54d
+[新增] 可以设置“使用阿修罗霸凰拳时不消耗玩家的SP” (conf/battle/extend.conf 的 extremityfist_no_require_sp 选项)
+[新增] 可以设置“无视使用阿修罗霸凰拳后的SP恢复限制” (conf/battle/extend.conf 的 ignore_extremityfist_sp_limit 选项)
+[新增] 允许单独限制玩家在PVP地图时的攻速 (conf/battle/extend.conf 的 max_aspd_for_pvp 选项)
+[新增] 允许单独限制玩家在GVG地图时的攻速 (conf/battle/extend.conf 的 max_aspd_for_gvg 选项)
+[修正] rAthena官方BUG: 使用 bonus4 bAddEffWhenHit,eff,n,y,t; 时, 若 n 设定的值大于 624 时会报错的问题
+[修正] rAthena官方BUG: 使用 bonus4 bAddEffWhenHit,eff,n,y,t; 时, 设置 y 为 ATF_SELF 时无效的问题
+[修正] 修正袭击飞空艇任务被触发时, 提示Airship Staff#airplane01不存在的问题
+[汉化] 完全汉化普隆德拉骑士和十字军的大嘴鸟饲养员
+[汉化] 汉化sql-files目录中4个与item_db相关的sql文件
+[汉化] 校对并优化艾音布罗克、朱诺飞空艇的机场职员对话
+[汉化] 校对和优化毁葛、拉赫、里希塔乐镇、依斯鲁德岛的机场职员对话
+[汉化] 优化并校对位于“airplane_01,32,61”的飞空艇小游戏“RO打字大挑战”主控NPC“倪思”的对话
+
+v1.0.7(2015-09-25)
+------------------
+[同步] rAthena官方Github库
+       https://github.com/rathena/rathena/commit/5e18376dc8a84f1f33398aa5db36aacc8b4d9207
+[升级] 若您不是全新安装的话, 请删除以下文件
+       - db/quest_db.txt
+[调整] 暂时关闭对官方VIP机制的支持
+[修正] rAthena官方BUG: 使用 @accinfo 指令查询一个pincode不为空的账号时, 却看到pincode是“空密码”的问题
+[修正] rAthena官方BUG: 当item_cash_db.txt为空时, cashshop 类型的NPC商店无法正常交易的问题
+[汉化] 完全汉化 @accinfo 指令的回显信息
+[汉化] 汉化战斗配置文件 conf/battle/status.conf 的4个选项说明
+[汉化] 汉化和润色飞空艇上的相关设施 npc/airports/airships.txt(还有2个NPC没校对润色)
+	   
+v1.0.6(2015-09-20)
+------------------
+[同步] rAthena官方Github库
+       https://github.com/rathena/rathena/commit/e46574a12d5a137c9d5423223d392969381c870d
+[升级] 若您不是全新安装的话, 请在您的【日志数据库】上按顺序导入以下sql文件
+       - sql-files\upgrades\upgrade_20150917_log.sql
+[汉化] 完全汉化“无尽之塔”副本
+[汉化] 部分汉化 conf/battle/feature.conf 中 feature.roulette 选项的说明
+[汉化] 部分汉化 @accinfo 指令的回显信息 感谢 ╰づ记忆•斑驳〤 协助汉化
+
+v1.0.5(2015-09-12)
+------------------
+[新增] 双击bat启动的批处理有更加专业的标题显示
+[新增] 若是初次使用, 会自动将 import-tmpl 目录重命名为 import
+[修正] rAthena官方BUG: 使用unitwalk脚本指令移动完毕后, 不会触发指定事件的问题 感谢 Sariel 汇报
+[修正] 修正部分汉化的魔物名称是道具名字的问题
+[汉化] 部分汉化剩余的大部分商人NPC的名称、剩下少数几个复兴后城镇的商人没汉化
+[汉化] 完全汉化位于“alberta,118,160”的“子弹商人 汤尼”
+[汉化] 完全汉化公会城堡数据库中的城堡名称 db/castle_db.txt
+[汉化] 完全汉化普通公会战的相关脚本, 包括旗帜、公会城堡内的卡普拉设施等
+[汉化] 完善物品掉率相关选项的详细说明
+
+v1.0.4(2015-09-04)
+------------------
+[同步] rAthena官方Github库
+       https://github.com/rathena/rathena/commit/6295c77d393555fe5a366f092a75f4cf0d2de933
+[升级] 若您不是全新安装的话, 请在您的【主数据库】上按顺序导入以下两个sql文件
+       - sql-files\upgrades\upgrade_20150828.sql
+	   - sql-files\upgrades\upgrade_20150831.sql
+[汉化] 部分汉化使用GM指令之后系统返回的信息 conf/msg_conf/map_msg.conf
+[汉化] 部分汉化和状态相关的战斗配置文件 conf/battle/status.conf
+[汉化] 完全汉化炼金术师公会贩卖药水制作书的“公会销售员”
+[汉化] 完全汉化“微笑小姐”
+[汉化] 完全汉化“果汁制作任务”相关的NPC
+[汉化] 完全汉化“箭矢筒制作”相关的NPC
+[汉化] 完全汉化位于“prontera,73,140”的“牛奶供应商”
+[汉化] 完全汉化吉芬铁匠公会贩卖铁砧的“克理斯多福”
+[汉化] 完全汉化装备修理工
+[汉化] 完全汉化忽克连等经典的装备精炼人员
+[汉化] 完全汉化兑换神之金属和铝的“帝特立西”等人员
+
+v1.0.3(2015-08-28)
+------------------
+[新增] 默认启用封包混淆机制, 配套客户端补丁使用可防WPE
+       混淆密钥为: 0x00dd7a90,0x37ea4427,0x28b79a45
+[新增] 支持使用 @reloadmsgconf 重新读取 conf/msg_conf/translation.conf 中的汉化结果
+[修正] rAthena官方BUG: 有时VIP用户使用技能还需要消耗蓝色魔力矿石的问题 感谢 alone 汇报
+[汉化] 完全汉化“rAthena功能配置文件” conf/battle/feature.conf 感谢 alone 协助汉化
+[汉化] 完全汉化“龙仙儒/龙先生”
+[汉化] 完全汉化“物品掉落战斗配置文件” conf/battle/drops.conf
+[汉化] 部分汉化“指令帮助文件” conf/help.txt
+[汉化] 部分汉化“地图列表文件”中的注释 conf/maps_athena.conf
+[汉化] 部分汉化“登录、角色、地图服务器的信息配置文件” conf/msg_conf/login_msg.conf、char_msg.conf、map_msg.conf
+[配置] 默认启用VIP机制和技能伤害修正机制
+[配置] 默认将 conf/battle/exp.conf 的 multi_level_up 选项设置为 yes
+
+v1.0.2(2015-08-22)
+------------------
+[同步] rAthena官方Github库
+       https://github.com/rathena/rathena/commit/a2e9a8a88c9e2ef93611e64c2cb1f21d4619cd43
+[新增] 扩展魔物名称能展现的信息, 加入体型、种族、属性等
+[修正] 部分汉字无法被用作角色名的问题
+[修正] npc目录中的conf文件里, 配置了某个不存在的脚本时, 终端不报错的问题
+[修正] GM角色获得手推车后, 用@hide进入隐身状态, 小退回来后ALT+W无法打开手推车的问题
+[汉化] 完全汉化“公会战斗配置文件” (conf/battle/guild.conf) 感谢 alone 协助汉化
+[汉化] 追加汉化一些终端的错误提示信息
+[配置] 玩家登录游戏时默认不显示服务端版本号
+
+v1.0.1(2015-08-19)
+------------------
+[汉化] 物品数据库中的常用物品名称
+[汉化] 魔物数据库中的常见魔物名称
+[汉化] 完全汉化“数据封包配置文件” (conf/packet_athena.conf) 感谢 alone 进行汉化
+[配置] 已将 conf/battle/monster.conf 中 override_mob_names 的值改成 2 以便加载中文魔物名称
+
+v1.0.0(2015-08-17)
+------------------
+[同步] rAthena官方Github库
+       https://github.com/rathena/rathena/commit/c4dab3cf92060398a2e31ee3684f05ce59f0bcf7
+[新增] 分享rAthenaCN的第一个版本
+[汉化] 卡普拉、邮件筒、飞空艇公告、NPC商店
+[汉化] 部分基础配置文件
+[汉化] 常见的控制台输出信息内容

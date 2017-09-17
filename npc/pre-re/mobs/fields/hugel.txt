@@ -1,0 +1,144 @@
+//===== rAthenaCN 汉化声明 ===================================
+//= 您可以随意转载和使用本汉化脚本。若您使用、借鉴或复制了
+//= 此脚本中的汉化成果，那么请在您的脚本中加上并保留这七行
+//= 汉化声明，由衷感谢。
+//= 若您对这个脚本有更好的翻译建议，或发现此脚本的汉化错误，
+//= 请前往 http://rathena.cn 上报您发现的问题，谢谢。
+//============================================================
+
+//===== rAthena Script =======================================
+//= Hugel Fields Monster Spawn Script
+//===== By: ==================================================
+//= Athena (1.0)
+//===== Current Version: =====================================
+//= 1.3
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Additional Comments: =================================
+//= Spawns for hu_fild05 and hu_fild04, numbers may not be correct [MasterOfMuppets]
+//= 0.2 Fixed Petit ID
+//= 0.3 Updated the spawns using kRO's website as info,  [MasterOfMuppets]
+//=      thanks to battousai90
+//= 0.4 Updated after Episode 10.4 - Hugel [Poki#3]
+//=     Mob quantity is custom.
+//= 1.0 Updated by using Tharis' Homun AI, by Tharis [Vicious]
+//= 1.1 Official X.3 spawns [Playtester]
+//= 1.2 Some 11.1 spawn updates [Playtester]
+//= 1.3 More accurate spawns [Playtester]
+//============================================================
+
+//==================================================
+// hu_fild01 - Hugel Field
+//==================================================
+hu_fild01,0,0	monster	微风	1692,5,900000,300000
+hu_fild01,0,0	monster	蓝色等离子体	1697,5,900000,300000
+hu_fild01,0,0	monster	绿色等离子体	1695,5,900000,300000
+hu_fild01,0,0	monster	紫色等离子体	1696,5,900000,300000
+hu_fild01,0,0	monster	红色等离子体	1694,5,900000,300000
+hu_fild01,0,0	monster	黄色等离子体	1693,5,900000,300000
+hu_fild01,0,0	monster	邪恶向日葵	1368,30,300000
+hu_fild01,0,0	monster	天邪鬼	1378,30,1200000,600000
+
+//==================================================
+// hu_fild02 - Hugel Field
+//==================================================
+hu_fild02,0,0	monster	疟蚊	1627,30
+hu_fild02,0,0	monster	诺博斯	1715,20
+hu_fild02,0,0	monster	黄诺博斯	1718,40
+hu_fild02,0,0	monster	微风	1692,10
+hu_fild02,0,0	monster	邪恶向日葵	1368,10,600000,120000
+hu_fild02,0,0	monster	绿变色龙	1687,20,600000,120000
+hu_fild02,85,85,53,47	monster	天邪鬼	1378,3,300000,120000
+hu_fild02,85,85,37,47	monster	诺博斯	1715,1,300000,120000
+hu_fild02,85,85,37,47	monster	黄诺博斯	1718,1,300000,120000
+
+//==================================================
+// hu_fild03 - Hugel Field
+//==================================================
+hu_fild03,0,0	monster	绿变色龙	1687,70
+hu_fild03,0,0	monster	诺博斯	1715,30
+hu_fild03,0,0	monster	波波利	1031,20
+hu_fild03,0,0	monster	盗虫	1051,10
+hu_fild03,40,157,3,3	monster	红菇	1085,2,300000
+hu_fild03,219,211,7,5	monster	红菇	1085,3,300000
+hu_fild03,285,230,5,4	monster	红菇	1085,2,300000
+hu_fild03,247,118,9,4	monster	红菇	1085,3,300000
+hu_fild03,96,156,5,5	monster	黑菇	1084,3,300000
+hu_fild03,170,220,5,4	monster	黑菇	1084,3,300000
+hu_fild03,212,328,5,4	monster	黑菇	1084,2,300000
+hu_fild03,231,151,3,3	monster	黑菇	1084,2,300000
+
+//==================================================
+// hu_fild04 - Hugel Field
+//==================================================
+hu_fild04,0,0	monster	微风	1692,20
+hu_fild04,0,0	monster	七彩飞龙	1384,10,420000,24000
+hu_fild04,0,0	monster	七彩地龙	1385,10,420000,240000
+hu_fild04,0,0	monster	毕帝特地龙	1155,10
+hu_fild04,0,0	monster	毕帝特飞龙	1156,60
+hu_fild04,0,0	monster	诺博斯	1715,20
+hu_fild04,0,0	monster	黄诺博斯	1718,10
+hu_fild04,0,0	monster	疟蚊	1627,30
+hu_fild04,0,0	monster	绿变色龙	1687,20
+hu_fild04,60,149,35,122	monster	沙妖	1386,7,600000,300000
+hu_fild04,0,0	monster	绿草	1080,10
+hu_fild04,0,0	monster	黄草	1081,10
+hu_fild04,206,210,30,18	monster	蓝草	1079,4,120000,600000
+hu_fild04,206,120,10,10	monster	蓝草	1079,2,120000,600000
+
+//==================================================
+// hu_fild05 - Hugel Field
+//==================================================
+hu_fild05,185,208,15,24	monster	疟蚊	1627,3,42000,30000
+hu_fild05,112,272,62,82	monster	绿变色龙	1687,15
+hu_fild05,112,272,62,82	monster	诺博斯	1715,2
+hu_fild05,112,272,62,82	monster	黄诺博斯	1718,2
+hu_fild05,112,272,62,82	monster	疟蚊	1627,10
+hu_fild05,112,272,62,82	monster	半龙人	1262,1,24000000,1800000
+hu_fild05,276,302,93,60	monster	绿变色龙	1687,15
+hu_fild05,276,302,93,60	monster	诺博斯	1715,2
+hu_fild05,276,302,93,60	monster	黄诺博斯	1718,1
+hu_fild05,276,302,93,60	monster	疟蚊	1627,10
+hu_fild05,276,302,93,60	monster	半龙人	1262,1,24000000,1800000
+hu_fild05,286,144,82,90	monster	绿变色龙	1687,15
+hu_fild05,286,144,82,90	monster	诺博斯	1715,2
+hu_fild05,286,144,82,90	monster	黄诺博斯	1718,2
+hu_fild05,286,144,82,90	monster	疟蚊	1627,10
+hu_fild05,286,144,82,90	monster	半龙人	1262,1,24000000,1800000
+hu_fild05,118,106,80,70	monster	绿变色龙	1687,15
+hu_fild05,118,106,80,70	monster	诺博斯	1715,2
+hu_fild05,118,106,80,70	monster	黄诺博斯	1718,1
+hu_fild05,118,106,80,70	monster	疟蚊	1627,10
+hu_fild05,118,106,80,70	monster	半龙人	1262,1,24000000,1800000
+hu_fild05,0,0	monster	疟蚊	1627,10
+hu_fild05,0,0	monster	龙蛋	1721,1,7200000,1800000
+hu_fild05,196,196,5,5	monster	龙蛋	1721,1,7200000,1800000
+hu_fild05,340,50,10,10	monster	龙蛋	1721,1,7200000,1800000
+hu_fild05,320,325,5,5	monster	龙蛋	1721,1,7200000,1800000
+
+//==================================================
+// hu_fild06 - Hugel Field
+//==================================================
+hu_fild06,0,0	monster	摩尔	1628,50
+hu_fild06,0,0	monster	刺猬虫	1103,20
+hu_fild06,0,0	monster	波利	1002,10
+hu_fild06,0,0	monster	波波利	1031,10
+hu_fild06,0,0	monster	金属波利	1613,10
+hu_fild06,234,251,14,120	monster	绿草	1080,10,600000
+hu_fild06,234,251,14,120	monster	黄草	1081,10,600000
+
+//==================================================
+// hu_fild07 - Hugel Field
+//==================================================
+hu_fild07,0,0	monster	微风	1692,10
+hu_fild07,0,0	monster	七彩飞龙	1384,10,420000,24000
+hu_fild07,0,0	monster	七彩地龙	1385,10,420000,240000
+hu_fild07,0,0	monster	毕帝特地龙	1155,60
+hu_fild07,0,0	monster	毕帝特飞龙	1156,20
+hu_fild07,0,0	monster	诺博斯	1715,10
+hu_fild07,0,0	monster	黄诺博斯	1718,10
+hu_fild07,0,0	monster	疟蚊	1627,30
+hu_fild07,0,0	monster	绿变色龙	1687,10
+hu_fild07,0,0	monster	邪恶向日葵	1368,20
+hu_fild07,0,0	monster	天邪鬼	1378,10
+hu_fild07,0,0	monster	黄草	1081,20
