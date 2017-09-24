@@ -66,17 +66,29 @@ parseCommandDocker() {
     esac
 }
 
+getConfig() {
+    grep -E "^$2:\s*(.*?)$" $1 >/dev/null 2>&1;
+    if [ $? -ne 0 ]; then
+        echo $3
+        return
+    fi
+    echo $(grep -E "^$2:\s*(.*?)$" $1 | cut -d ":" -f2 | sed s/[[:space:]]//g)
+}
+
 execAction() {
     echo "execAction : $1"
     case $1 in
         start_login_only)
-            docker run -ti -v "$this:/data/rAthenaCN" -p 6900:6900 --rm cairolee/racn-serv login
+            login_port=$(getConfig $this/conf/login_athena.conf login_port 6900)
+            docker run -ti -v "$this:/data/rAthenaCN" -p $login_port:$login_port --rm cairolee/racn-serv login
         ;;
         start_char_only)
-            docker run -ti -v "$this:/data/rAthenaCN" -p 6121:6121 --rm cairolee/racn-serv char
+            char_port=$(getConfig $this/conf/char_athena.conf char_port 6121)
+            docker run -ti -v "$this:/data/rAthenaCN" -p $char_port:$char_port --rm cairolee/racn-serv char
         ;;
         start_map_only)
-            docker run -ti -v "$this:/data/rAthenaCN" -p 5121:5121 --rm cairolee/racn-serv map
+            map_port=$(getConfig $this/conf/map_athena.conf map_port 5121)
+            docker run -ti -v "$this:/data/rAthenaCN" -p $map_port:$map_port --rm cairolee/racn-serv map
         ;;
         docker_update)
             docker pull cairolee/racn-serv
